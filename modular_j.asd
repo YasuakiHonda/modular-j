@@ -7,7 +7,7 @@
 ;; Then you can load the package from github directly:
 
 ;; install_github("YasuakiHonda","modular-j","master");
-;; asdf_load("modular-j");
+;; asdf_load("modular_j");
 
 
 (defsystem modular-j
@@ -18,4 +18,4 @@
   :description "Maxima package for Elliptic Modular J function"
 
   :components
-    ((:maxima-file "modular-j")))
+    ((:maxima-file "modular_j")))
