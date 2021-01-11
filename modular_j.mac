@@ -68,7 +68,7 @@ FindInFD(p):=
 j_coeff:[196884, 21493760, 864299970, 20245856256, 333202640600, 4252023300096, 44656994071935, 
 401490886656000, 3176440229784420, 22567393309593600, 146211911499519294, 874313719685775360, 
 4872010111798142520, 25497827389410525184, 126142916465781843075]$
-float_modular_j(t):=ev(1/q+744+sum(j_coeff[i]*q^i,i,1,length(j_coeff)),q:rectform(exp(2*%pi*%i*t)),eval,float)$
+float_modular_j(t):=ev(1/q+744+sum(j_coeff[i]*q^i,i,1,length(j_coeff)),q:rectform(exp(2*%pi*%i*t)),eval,numer)$
 bfloat_modular_j(t):=ev(1/q+744+sum(j_coeff[i]*q^i,i,1,length(j_coeff)),q:rectform(exp(2*%pi*%i*t)),fpprec:32,eval,bfloat)$
 
 Checkabc(a,b,c):=(((-a<b) and (b<=a) and (a<c)) or ((0<=b) and (b<=a) and (a=c))) and gcd(gcd(a,b),c)=1$
