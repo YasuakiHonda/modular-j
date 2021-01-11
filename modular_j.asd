@@ -10,7 +10,7 @@
 ;; asdf_load("modular_j");
 
 
-(defsystem modular-j
+(defsystem modular_j
   :defsystem-depends-on ("maxima-file")
   :name "Modular J package"
   :author "Yasuaki Honda"
