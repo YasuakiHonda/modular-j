@@ -109,10 +109,14 @@ irr_number(t):=block([a1,a2,a3,a4,tmp],
   elseif op(tmp)="^" then [a2,a3]:[args(tmp)[1]^(args(tmp)[2]-1/2),args(tmp)[1]]
   else error("irr_number: argument is not well formated as an imaginary quadratic irrational number ",t),
   return([a1,a2,-a3,a4]))$
-  
-exact_modular_j(t):=block([tparts,D,fpjt,cpoly,sol,numsol],
+
+FindDetIrr(t):=block([tparts],
   tparts:irr_number(t),
   D:ev(4*a2^2*a3*a4^2/gcd(gcd(a4^2,2*a1*a4),a1^2-a2^2*a3)^2,a1:tparts[1],a2:tparts[2],a3:tparts[3],a4:tparts[4]),
+  return(D))$
+  
+exact_modular_j(t):=block([D,fpjt,cpoly,sol,numsol],
+  D:FindDetIrr(t),
   if debug_modular_j=true then print("D=",D),
   cpoly:FindClassPolyD(D), if cpoly=0 then error("exact_modular_j(): Cannot compute class polynomial for", t),
   if debug_modular_j=true then print("cpoly=",cpoly),
