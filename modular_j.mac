@@ -49,6 +49,8 @@ FindClassPolyD(D) D is an integer. FindClassPolyD(D) computes the Hilbert class 
 exact_modular_j(t) t is an imaginary quadratic irrational number of the form  𝑎1+𝑎2𝑎3√𝑎4  where  𝑎1,⋯,𝑎4  are integers,  𝑎2,𝑎4  positive and  𝑎3  negative. exact_modular_j(t) computes the exact value (which is an algebraic number) of  𝑗(𝑡)  using the above algorithm.
 */
 
+debug_modular_j:false;
+
 InFD(p):=block([absp,realp],absp:abs(p),realp:realpart(p),
   if imagpart(p) <= 0 then return (false)
   else return ((absp>1 and realp>=-1/2 and realp<1/2) or (absp=1 and -1/2<=realp and realp<=0)))$
@@ -111,9 +113,9 @@ irr_number(t):=block([a1,a2,a3,a4,tmp],
 exact_modular_j(t):=block([tparts,D,fpjt,cpoly,sol,numsol],
   tparts:irr_number(t),
   D:ev(4*a2^2*a3*a4^2/gcd(gcd(a4^2,2*a1*a4),a1^2-a2^2*a3)^2,a1:tparts[1],a2:tparts[2],a3:tparts[3],a4:tparts[4]),
-  print("D=",D),
+  if debug_modular_j=true then print("D=",D),
   cpoly:FindClassPolyD(D), if cpoly=0 then error("exact_modular_j(): Cannot compute class polynomial for", t),
-  print("cpoly=",cpoly),
+  if debug_modular_j=true then print("cpoly=",cpoly),
   if hipow(cpoly,x)>=5 then error("exact_modular_j(): Degree of class polynomial is higher than 5, ", cpoly),
   sol:solve(cpoly),
   numsol:map(lambda([x],rhs(float(x))),sol),
