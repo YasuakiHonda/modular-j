@@ -40,6 +40,8 @@ FindInFD(p) p is a complex number. FindInFD(p) returns a complex number in the f
 
 float_modular_j(t) t is a complex float number. float_modular_j(t) numerically computes the value of  𝑗(𝑡) .
 
+FindDetIrr(t) t is an imaginary quadratic irrational number. FindDetIrr(t) computes the determinant of t.
+
 FindReducedQuadIrrD(D) D is an integer. FindReducedQuadIrrD(D) computes the list of all the reduced imaginary quadratic irrational numbers whose determinant is  𝐷 .
 
 FindClassNumberD(D) D is an integer. FindClassNumberD(D) computes the class number of the determinant  𝐷 .
