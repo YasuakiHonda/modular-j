@@ -38,6 +38,12 @@ Function: **bfloat_modular_j(t)**
 t is a complex number. **bloat_modular_j(t)**  numerically computes the complex big float value of j(t).
 
 -----
+
+Function: **FindDetIrr(t)** 
+
+t is an imaginary quadratic irrational number. FindDetIrr(t) computes the determinant of t.
+
+-----
 Function: **FindReducedQuadIrrD(D)**
 
 D is an integer. **FindReducedQuadIrrD(D)** computes the list of all the reduced imaginary quadratic irrational numbers whose determinant is D. 
