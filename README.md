@@ -5,12 +5,12 @@ Maxima implementation of Klein's modular-j function
 
 Assuming maxima-asdf is already loaded in your Maxima, you can load this package directly from Github:
 
-	(%i1) install_github("YasuakiHonda","modular-j","master")$
-	(%i2) asdf_load("modular-j")$
+	(%i1) install_github("YasuakiHonda","modular_j","master")$
+	(%i2) asdf_load("modular_j")$
     
-If not, you can simply download modular-j.mac and save it. In the Maxima session, you can do:
+If not, you can simply download modular_j.mac and save it. In the Maxima session, you can do:
 
-	(%i3) load("modular-j.mac")$
+	(%i3) load("modular_j.mac")$
     
 
 ### API Description
