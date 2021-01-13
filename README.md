@@ -41,7 +41,7 @@ t is a complex number. **bloat_modular_j(t)**  numerically computes the complex 
 
 Function: **FindDetIrr(t)** 
 
-t is an imaginary quadratic irrational number. FindDetIrr(t) computes the determinant of t.
+t is an imaginary quadratic irrational number. **FindDetIrr(t)** computes the determinant of t.
 
 -----
 Function: **FindReducedQuadIrrD(D)**
