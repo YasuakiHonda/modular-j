@@ -62,12 +62,12 @@ Ta(p):=block([realp,ans],realp:realpart(p),ans:realp-floor(realp+1/2),
   return(realp-ans))$
 
 FindInFD(p):=
-  block([a],a:Ta(p), if a#0 then print("Ta:",a), p:p-a,
-  if abs(p)<1 then (print("S"),return(FindInFD(-1/p))),
-  if abs(p)>1 then return(p),
-  if abs(p)=1 then
-    if realpart(p)<=0 then return(p)
-    else return(-1/p))$
+  ev(block([a],a:Ta(p), if a#0 then print("Ta:",a), p:p-a,
+    if abs(p)<1 then (print("S"),return(FindInFD(-1/p))),
+    if abs(p)>1 then return(p),
+    if abs(p)=1 then
+      if realpart(p)<=0 then return(p)
+      else return(-1/p)),ratsimp,algebraic:true)$
 
 j_coeff:[196884, 21493760, 864299970, 20245856256, 333202640600, 4252023300096, 44656994071935, 
 401490886656000, 3176440229784420, 22567393309593600, 146211911499519294, 874313719685775360, 
