@@ -67,3 +67,16 @@ D is an integer. **FindClassPolyD(D)** computes the Hilbert class polynomial of 
 Function: **exact_modular_j(t)** 
 
 t is an imaginary quadratic irrational number of the form (a1+a2\*sqrt(a3))/a4, where a1,...,a4 are integers, a2, a4 positive and a3 negative. **exact_modular_j(t)** computes the exact value (which is an algebraic number) of j(t) if possible.
+
+-----
+# Examples
+
+Ipynb files contain the example sessions of using Maxima with modular_j package. You can view sessions with the following links:
+
+[modular_j1.ipynb](https://nbviewer.jupyter.org/github/YasuakiHonda/modular_j/blob/main/modular_j1.ipynb)
+
+[modular_j2.ipynb](https://nbviewer.jupyter.org/github/YasuakiHonda/modular_j/blob/main/modular_j2.ipynb)
+
+[modular_j3.ipynb](https://nbviewer.jupyter.org/github/YasuakiHonda/modular_j/blob/main/modular_j3.ipynb)
+
+[modular_j4.ipynb](https://nbviewer.jupyter.org/github/YasuakiHonda/modular_j/blob/main/modular_j4.ipynb)
