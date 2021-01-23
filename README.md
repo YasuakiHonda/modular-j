@@ -58,9 +58,9 @@ D is an integer. **FindClassNumberD(D)** computes the class number of the determ
 
 -----
 
-Function: **FindClassPolyD(D)** 
+Function: **FindClassPolyD(var,D)** 
 
-D is an integer. **FindClassPolyD(D)** computes the Hilbert class polynomial of the determinant equal to D. 
+var is a variable, D is an integer. **FindClassPolyD(var,D)** computes the Hilbert class polynomial of a variable var and the determinant equal to D. 
 
 -----
 
