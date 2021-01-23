@@ -34,21 +34,21 @@ Find the correspondance between aproximate  𝑗(𝑥𝑖)  and the exact  𝑗(
 
 API Manual
 
-InFD(p) p is a complex number. InFD(p) checks if p is in the fundamental domain of  𝑗(𝑧) .
+InFD(p) p is a complex number. InFD(p) checks if p is in the fundamental domain of j(t).
 
 FindInFD(p) p is a complex number. FindInFD(p) returns a complex number in the fundamental domain and equivalent to p. It shows the necessary transformations, too.
 
-float_modular_j(t) t is a complex float number. float_modular_j(t) numerically computes the value of  𝑗(𝑡) .
+float_modular_j(t) t is a complex float number. float_modular_j(t) numerically computes the value of j(t).
 
 FindDetIrr(t) t is an imaginary quadratic irrational number. FindDetIrr(t) computes the determinant of t.
 
-FindReducedQuadIrrD(D) D is an integer. FindReducedQuadIrrD(D) computes the list of all the reduced imaginary quadratic irrational numbers whose determinant is  𝐷 .
+FindReducedQuadIrrD(D) D is an integer. FindReducedQuadIrrD(D) computes the list of all the reduced imaginary quadratic irrational numbers whose determinant is D.
 
-FindClassNumberD(D) D is an integer. FindClassNumberD(D) computes the class number of the determinant  𝐷 .
+FindClassNumberD(D) D is an integer. FindClassNumberD(D) computes the class number of the determinant D.
 
-FindClassPolyD(D) D is an integer. FindClassPolyD(D) computes the Hilbert class polynomial of the determinant equal to  𝐷 .
+FindClassPolyD(var,D) var is a variable, D is an integer. FindClassPolyD(D) computes the Hilbert class polynomial of variable var and the determinant equal to D.
 
-exact_modular_j(t) t is an imaginary quadratic irrational number of the form  𝑎1+𝑎2𝑎3√𝑎4  where  𝑎1,⋯,𝑎4  are integers,  𝑎2,𝑎4  positive and  𝑎3  negative. exact_modular_j(t) computes the exact value (which is an algebraic number) of  𝑗(𝑡)  using the above algorithm.
+exact_modular_j(t) t is an imaginary quadratic irrational number of the form (a1+a2*sqrt(a3))/a4 where a1,,,a4 are integers, a2,a4 positive and a4 negative. exact_modular_j(t) computes the exact value (which is an algebraic number) of j(t) using the above algorithm.
 */
 
 debug_modular_j:false;
@@ -86,13 +86,13 @@ FindReducedQuadIrrD(D):=block([reduced_irr_list:[]],
 
 FindClassNumberD(D):=length(FindReducedQuadIrrD(D))$
 
-FindClassPolyD(D):= block([reduced_irr_list,ja_list:[],aprox_class_poly:0, class_poly:0,x],
+FindClassPolyD(var,D):= block([reduced_irr_list,ja_list:[],aprox_class_poly:0, class_poly:0],
   reduced_irr_list:FindReducedQuadIrrD(D),
   if length(reduced_irr_list)=0 then return(0),
   ja_list:map(bfloat_modular_j,reduced_irr_list),
-  aprox_class_poly:expand(product(x-ja_list[i],i,1,length(ja_list))),
-  for i:0 thru hipow(aprox_class_poly,x) do
-    class_poly:class_poly+round(realpart(coeff(aprox_class_poly,x,i)))*x^i,
+  aprox_class_poly:expand(product(var-ja_list[i],i,1,length(ja_list))),
+  for i:0 thru hipow(aprox_class_poly,var) do
+    class_poly:class_poly+round(realpart(coeff(aprox_class_poly,var,i)))*var^i,
   class_poly)$
 
 /*
@@ -117,14 +117,14 @@ FindDetIrr(t):=block([tparts],
   D:ev(4*a2^2*a3*a4^2/gcd(gcd(a4^2,2*a1*a4),a1^2-a2^2*a3)^2,a1:tparts[1],a2:tparts[2],a3:tparts[3],a4:tparts[4]),
   return(D))$
   
-exact_modular_j(t):=block([D,fpjt,cpoly,sol,numsol],
+exact_modular_j(t):=block([D,fpjt,cpoly,sol,numsol,x],
   D:FindDetIrr(t),
   if debug_modular_j=true then print("D=",D),
-  cpoly:FindClassPolyD(D), if cpoly=0 then error("exact_modular_j(): Cannot compute class polynomial for", t),
+  cpoly:FindClassPolyD(x,D), if cpoly=0 then error("exact_modular_j(): Cannot compute class polynomial for", t),
   if debug_modular_j=true then print("cpoly=",cpoly),
   if hipow(cpoly,x)>=5 then error("exact_modular_j(): Degree of class polynomial is higher than 5, ", cpoly),
   sol:solve(cpoly),
-  numsol:map(lambda([x],rhs(float(x))),sol),
+  numsol:map(lambda([xx],rhs(float(xx))),sol),
   fpjt:float_modular_j(t),
   block([mindex,minval],mindex:1,minval:abs(numsol[1]-fpjt),
     for i:1 thru length(numsol) do
