@@ -86,7 +86,7 @@ FindReducedQuadIrrD(D):=block([reduced_irr_list:[]],
 
 FindClassNumberD(D):=length(FindReducedQuadIrrD(D))$
 
-FindClassPolyD(D):= block([reduced_irr_list,ja_list:[],aprox_class_poly:0, class_poly:0],
+FindClassPolyD(D):= block([reduced_irr_list,ja_list:[],aprox_class_poly:0, class_poly:0,x],
   reduced_irr_list:FindReducedQuadIrrD(D),
   if length(reduced_irr_list)=0 then return(0),
   ja_list:map(bfloat_modular_j,reduced_irr_list),
