@@ -99,16 +99,33 @@ FindClassPolyD(var,D):= block([reduced_irr_list,ja_list:[],aprox_class_poly:0, c
 t must be of the form (a1+a2*sqrt(a3))/a4 where a1 to a4 are all integers, a2,a4 positive and a3 negative.
 irr_number(t) returns [a1,a2,a3,a4]
 */
+irr_number_parse_exp(e):=
+  /* e must of the form exp1^exp2 where exp2 is n/2, n odd and n>=3. if e is mulformed, return false.
+     Otherwise, [exp1^(exp2-1/2),exp1] is returned. */
+  if (not(atom(e)) and op(e)="^" and integerp(args(e)[1]) and 
+      not(atom(args(e)[2])) and op(args(e)[2])="/" and args(args(e)[2])[2]=2 ) then
+     [args(e)[1]^(args(e)[2]-1/2),args(e)[1]]
+  else false$
+  
 irr_number(t):=block([a1,a2,a3,a4,tmp],
   if imagpart(t)=0 then error("irr_number: argument is not an imaginary quadratic irrational number ",t),
   a4:ratdenom(t), 
   t:t*a4,
   a1:realpart(t),
   tmp:imagpart(t),
+  /* tmp pattern: int, sqrt(int), int^(int/2), int*sqrt(int),int*int^(int/2) */
   if integerp(tmp) then [a2,a3]:[tmp,1]
   elseif op(tmp)='sqrt then [a2,a3]:[1,args(tmp)[1]]
-  elseif op(tmp)="*" then [a2,a3]:[args(tmp)[1],args(args(tmp)[2])[1]]
-  elseif op(tmp)="^" then [a2,a3]:[args(tmp)[1]^(args(tmp)[2]-1/2),args(tmp)[1]]
+  elseif op(tmp)="^" then 
+    block([ret:irr_number_parse_exp(tmp)],
+      if ret=false then error("irr_number: argument is not well formated as an imaginary quadratic irrational number ",t)
+      else [a2,a3]:ret)
+  elseif op(tmp)="*" and not(atom(args(tmp)[2])) and op(args(tmp)[2])='sqrt then 
+    [a2,a3]:[args(tmp)[1],args(args(tmp)[2])[1]]
+  elseif op(tmp)="*" and not(atom(args(tmp)[2])) and op(args(tmp)[2])="^" then
+    block([ret:irr_number_parse_exp(args(tmp)[2])],
+    if ret=false then error("irr_number: argument is not well formated as an imaginary quadratic irrational number ",t)
+      else [a2,a3]:[args(tmp)[1]*ret[1],ret[2]])
   else error("irr_number: argument is not well formated as an imaginary quadratic irrational number ",t),
   return([a1,a2,-a3,a4]))$
 
